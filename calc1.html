@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Calculator</title>
+    <style>
+        body {
+            width: 500px;
+            margin: 4% auto;
+            font-family: 'Source Sans Pro', sans-serif;
+            letter-spacing: 5px;
+            font-size: 1.8rem;
+        }
+
+        .modify {
+            border: 1px dashed blue;
+            padding: 10px 20px 10px 30px;
+            margin: 10px 10px 10px 10px;
+        }
+
+
+
+        button {
+            cursor: pointer;
+            width: 65px;
+            height: 65px;
+
+        }
+
+
+        .calc-value {
+            border: 1px solid #ddd;
+            border-radius: 1px;
+            height: 60px;
+            padding-right: 15px;
+            padding-top: 10px;
+            text-align: right;
+            margin-right: 6px;
+            font-size: 2.5rem;
+            overflow-x: auto;
+            transition: all .2s ease-in-out;
+        }
+
+        .calc-value:hover {
+            box-shadow: inset 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="modify">
+        <p class="calc">Calculator</p>
+        <div class="calcbox">
+            <p class="calc-value"></p>
+
+            <p>
+                <button class="value" onclick="
+                    solve(1)">1</button>
+                <button class="value" onclick="solve(2)">2</button>
+                <button class="value" onclick="solve(3)">3</button>
+                <button class="operator" onclick="solve('+')">+</button>
+            </p>
+            <p>
+                <button class="value" onclick="solve(4)">4</button>
+                <button class="value" onclick="solve(5)">5</button>
+                <button class="value" onclick="solve(6)">6</button>
+                <button class="operator" onclick="solve('-')">-</button>
+            </p>
+            <p><button class="value" onclick="solve(7)">7</button>
+                <button class="value" onclick="solve(8)">8</button>
+                <button class="value" onclick="solve(9)">9</button>
+                <button class="operator" onclick="solve('*')">*</button>
+            </p>
+            <p>
+                <button class="value" onclick="solve(0)" onkeydown="if(key.event=='0'){
+                    solve(0)
+                }">0</button>
+                <button class="operator" onclick="solve('.')">.</button>
+                <button class="operator" onclick="calculate=eval(calculate);show()">=</button>
+                <button class="operator" onclick="solve('/')">/</button>
+            </p>
+            <p>
+                <button class="clear" onclick="calculate='';solve(' ')" id="clear">Clear</button>
+            </p>
+        </div>
+    </div>
+    <script>
+        let calculate = '';
+        function solve(num) {
+            calculate += num;
+            show();
+        }
+        function show() {
+            document.querySelector('.calc-value').innerHTML = calculate;
+        }
+        document.body.addEventListener('keydown', (event) => {
+            
+            if (event.key == 1) {
+                solve(1);
+            }
+            else if (event.key == 2) {
+                solve(2);
+            }
+            else if (event.key == 3) {
+                solve(3);
+            } else if (event.key == 4) {
+                solve(4);
+            } else if (event.key == 5) {
+                solve(5);
+            } else if (event.key == 6) {
+                solve(6);
+            } else if (event.key == 7) {
+                solve(7);
+            } else if (event.key == 8) {
+                solve(8);
+            } else if (event.key == 9) {
+                solve(9);
+            } else if (event.key === '.') {
+                solve('.');
+            } else if (event.key === '+') {
+                solve('+');
+            } else if (event.key === '*') {
+                solve('*');
+            } else if (event.key === '/') {
+                solve('/');
+            }
+            else if (event.key === '-') {
+                solve('-');
+            }
+            else if (event.key === 'Enter') {
+                calculate = eval(calculate); show();
+            }
+            else if (event.key === 'Delete') {
+                calculate = '';
+                solve(' ');
+            }
+            
+        });
+
+
+    </script>
+</body>
+
+</html>
